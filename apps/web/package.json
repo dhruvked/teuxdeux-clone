@@ -22,7 +22,10 @@
     "tw-animate-css": "^1.3.4",
     "zod": "^4.1.12",
     "babel-plugin-react-compiler": "^1.0.0",
-    "@tanstack/react-query": "^5.85.5"
+    "@tanstack/react-query": "^5.85.5",
+    "@mantine/core": "^7.14.2",
+    "@mantine/hooks": "^7.14.2",
+    "@mantine/notifications": "^7.14.2"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.10",
