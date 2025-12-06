@@ -1,0 +1,5 @@
+packages:
+  - apps/*
+  - packages/*
+catalog:
+  dotenv: ^17.2.2
