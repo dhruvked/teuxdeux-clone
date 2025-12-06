@@ -1,11 +1,8 @@
 import "dotenv/config";
-import { neon, neonConfig } from "@neondatabase/serverless";
-import { drizzle } from "drizzle-orm/neon-serverless";
-import ws from "ws";
+import { neon } from "@neondatabase/serverless";
+import { drizzle } from "drizzle-orm/neon-http";
 
-import * as schema from "./schema";
-
-neonConfig.webSocketConstructor = ws;
+import * as schema from "./schema.js";
 
 const sql = neon(process.env.DATABASE_URL || "");
 
