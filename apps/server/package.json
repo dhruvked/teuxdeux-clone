@@ -7,22 +7,29 @@
     "check-types": "tsc -b",
     "compile": "bun build --compile --minify --sourcemap --bytecode ./src/index.ts --outfile server",
     "dev": "tsx watch src/index.ts",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate"
   },
   "dependencies": {
-    "express": "^5.1.0",
+    "@neondatabase/serverless": "^1.0.1",
     "cors": "^2.8.5",
-    "dotenv": "catalog:",
-    "zod": "^4.1.11",
-    "@teuxdeux-clone/db": "workspace:*"
+    "dotenv": "^17.2.1",
+    "drizzle-orm": "^0.44.2",
+    "express": "^5.1.0",
+    "ws": "^8.18.3",
+    "zod": "^4.0.2"
   },
   "devDependencies": {
-    "typescript": "^5.8.2",
-    "@types/express": "^5.0.1",
     "@types/cors": "^2.8.17",
-    "tsx": "^4.19.2",
+    "@types/express": "^5.0.1",
     "@types/node": "^22.13.11",
-    "tsdown": "^0.16.5",
-    "@teuxdeux-clone/config": "workspace:*"
+    "@types/ws": "^8.18.1",
+    "drizzle-kit": "^0.31.2",
+    "tsdown": "^0.15.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.8.2"
   }
 }
