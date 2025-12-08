@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { sql } from "drizzle-orm";
 
-import { db } from "@/db/index.js";
+import { db } from "../db/index.js";
 import { recurringRouter } from "./recurring.js";
 import { tasksRouter } from "./tasks.js";
 

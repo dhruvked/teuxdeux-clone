@@ -1,6 +1,6 @@
 import { randomUUID } from "crypto";
-import { db } from "@/db/index.js";
-import { users } from "@/db/schema.js";
+import { db } from "../db/index.js";
+import { users } from "../db/schema.js";
 
 export const DEFAULT_USER_ID =
   process.env.DEFAULT_USER_ID ?? "11111111-1111-1111-1111-111111111111";

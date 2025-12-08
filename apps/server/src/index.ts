@@ -2,8 +2,8 @@ import "dotenv/config";
 import cors from "cors";
 import express from "express";
 
-import { ensureDefaultUser } from "@/routes/context.js";
-import { router } from "@/routes/index.js";
+import { ensureDefaultUser } from "./routes/context.js";
+import { router } from "./routes/index.js";
 
 const app = express();
 

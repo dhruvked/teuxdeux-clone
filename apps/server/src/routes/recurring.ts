@@ -3,8 +3,8 @@ import { Router } from "express";
 import { and, eq } from "drizzle-orm";
 import { z } from "zod";
 
-import { db } from "@/db/index.js";
-import { recurringRules } from "@/db/schema.js";
+import { db } from "../db/index.js";
+import { recurringRules } from "../db/schema.js";
 import { DEFAULT_USER_ID } from "./context.js";
 import { parseDateOptional, parseDateRequired } from "./utils.js";
 

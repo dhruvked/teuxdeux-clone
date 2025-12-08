@@ -8,9 +8,6 @@
     "skipLibCheck": true,
     "ignoreDeprecations": "6.0",
     "baseUrl": "./",
-    "paths": {
-      "@/*": ["./src/*"]
-    },
     "outDir": "./dist",
     "types": ["node"],
     "composite": true,
