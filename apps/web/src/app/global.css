@@ -1,0 +1,105 @@
+/* globals.css */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #0a0a0a;
+  overscroll-behavior: none;
+  font-family: "Inter", sans-serif !important;
+  background: radial-gradient(circle at top, #111 0%, #000 100%);
+  color: white;
+}
+html {
+  scroll-behavior: smooth;
+}
+html,
+body {
+  -webkit-tap-highlight-color: transparent;
+}
+/* Smooth fade for messages */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hide scrollbars like ChatGPT */
+*::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}
+* {
+  scrollbar-width: none;
+}
+
+/* Selection color */
+::selection {
+  background: rgba(90, 115, 255, 0.4);
+}
+@keyframes pulseRecord {
+  0% {
+    box-shadow: 0 0 6px rgba(255, 0, 0, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 14px rgba(255, 0, 0, 0.9);
+  }
+  100% {
+    box-shadow: 0 0 6px rgba(255, 0, 0, 0.4);
+  }
+}
+.mono-btn:hover {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.22) !important;
+}
+
+.mono-btn-strong:hover {
+  background: rgba(255, 255, 255, 0.18) !important;
+  border-color: rgba(255, 255, 255, 0.28) !important;
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+@keyframes recordPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2),
+      0 0 40px rgba(255, 255, 255, 0.1);
+  }
+  50% {
+    transform: scale(1.15);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.25),
+      0 0 60px rgba(255, 255, 255, 0.18);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2),
+      0 0 40px rgba(255, 255, 255, 0.1);
+  }
+}
+
+@keyframes recordInner {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.25);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+}

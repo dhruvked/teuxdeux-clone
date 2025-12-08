@@ -1,36 +1,59 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { ColorSchemeScript, MantineProvider } from "@mantine/core";
+import { MantineProvider, ColorSchemeScript } from "@mantine/core";
 import "@mantine/core/styles.css";
-import "../index.css";
+import "@/app/global.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+export const metadata = {
+  title: "TODO_sample",
+  description: "TeuxDeux Clone",
+};
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-export const metadata: Metadata = {
-  title: "teuxdeux-clone",
-  description: "teuxdeux-clone",
+export const viewport = {
+  themeColor: "#000000",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <ColorSchemeScript defaultColorScheme="dark" />
+        {/* Fonts */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
+          rel="stylesheet"
+        />
+
+        {/* Mobile UX */}
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        {/* PWA */}
+        <link rel="manifest" href="/manifest.json" />
+
+        {/* Debug Console (Eruda) — Loaded only on mobile */}
+        <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if (typeof window !== 'undefined' && /mobile|android|iphone/i.test(navigator.userAgent)) {
+                eruda.init({
+                  defaults: {
+                    displaySize: 30,
+                    transparency: 0.95,
+                    position: 'right'
+                  }
+                });
+              }
+            `,
+          }}
+        />
       </head>
+
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        style={{
+          fontFamily: "Inter, sans-serif",
+        }}
       >
         <MantineProvider defaultColorScheme="dark">{children}</MantineProvider>
       </body>
