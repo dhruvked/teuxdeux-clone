@@ -1,14 +1,12 @@
 "use client";
 
-import { Container, Stack, Title } from "@mantine/core";
-import { TaskBoard } from "@/components/task-board";
-
 export default function Home() {
   return (
-    <Container size="xl" py="xl">
-      <Stack gap="lg">
-        <TaskBoard />
-      </Stack>
-    </Container>
+    <div className="container mx-auto px-4 py-10">
+      <h1 className="text-2xl font-semibold">Frontend placeholder</h1>
+      <p className="text-sm text-slate-600">
+        The frontend has been removed for now. You can build your own UI against the backend endpoints documented in the README.
+      </p>
+    </div>
   );
 }

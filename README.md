@@ -1,71 +1,73 @@
-# teuxdeux-clone
+# Teuxdeux Clone (Backend Ready)
 
-This project was created with [Better-T-Stack](https://github.com/AmanVarshney01/create-better-t-stack), a modern TypeScript stack that combines Next.js, Express, and more.
+This monorepo wires up a PostgreSQL-backed API for a Teuxdeux-style planner. The frontend has been stripped out so you can build your own UI against the existing endpoints.
 
-## Features
+## Stack
+- **Backend:** Express (Node 18+), Drizzle ORM, Neon/PostgreSQL
+- **DB schema:** `TD_TODO` schema with `users`, `tasks`, `recurring_rules`
+- **Tooling:** PNPM, Turbo, Drizzle Kit
+- **Frontend:** Next.js app present but blank (no UI)
 
-- **TypeScript** - For type safety and improved developer experience
-- **Next.js** - Full-stack React framework
-- **TailwindCSS** - Utility-first CSS for rapid UI development
-- **shadcn/ui** - Reusable UI components
-- **Express** - Fast, unopinionated web framework
-- **Node.js** - Runtime environment
-- **Drizzle** - TypeScript-first ORM
-- **PostgreSQL** - Database engine
-- **Turborepo** - Optimized monorepo build system
-
-## Getting Started
-
-First, install the dependencies:
-
-```bash
-pnpm install
+## Running the backend
+1) Set `apps/server/.env` with your Neon/Postgres URL:
 ```
-## Database Setup
+DATABASE_URL=postgresql://...
+```
+2) Run migrations (uses Drizzle Kit + the TD_TODO schema):
+```
+pnpm --filter server db:push
+```
+3) Start the API:
+```
+pnpm --filter server dev
+```
+API defaults to `http://localhost:3000`.
 
-This project uses PostgreSQL with Drizzle ORM.
-
-1. Make sure you have a PostgreSQL database set up.
-2. Update your `apps/server/.env` file with your PostgreSQL connection details.
-
-3. Apply the schema to your database:
-```bash
-pnpm run db:push
+The server seeds a default user (for now):
+```
+DEFAULT_USER_ID=11111111-1111-1111-1111-111111111111
+DEFAULT_USER_EMAIL=demo@local
 ```
 
+## API endpoints (no auth yet)
+- `GET /health` — ping
 
-Then, run the development server:
+### Tasks
+- `GET /tasks?start=YYYY-MM-DD&end=YYYY-MM-DD` — list tasks for date range
+- `POST /tasks` — `{ title, date?, sortOrder? }`
+- `PATCH /tasks/:id` — `{ title?, date?, completed?, sortOrder? }`
+- `DELETE /tasks/:id`
 
-```bash
-pnpm run dev
+Task model: `id, userId, title, date|null (Someday), completedAt|null, sortOrder, createdAt, updatedAt`.
+
+### Recurring rules
+- `GET /recurring`
+- `POST /recurring` — `{ title, cadence: daily|weekly|monthly, daysOfWeek?, dayOfMonth?, startsOn, endsOn?, isActive? }`
+- `PATCH /recurring/:id` — same fields optional
+- `DELETE /recurring/:id`
+
+Recurring model: `id, userId, title, cadence enum, daysOfWeek int[], dayOfMonth int?, startsOn, endsOn?, isActive, createdAt`.
+
+## Frontend status
+The Next.js app under `apps/web` is a placeholder page. Build your own UI against the endpoints above; configure the base URL with `NEXT_PUBLIC_API_URL` if needed.
+
+## Project structure
+```
+apps/
+  server/   # Express API + Drizzle
+  web/      # Next.js placeholder
+packages/
+  db/       # Drizzle config/schema (if retained)
 ```
 
-Open [http://localhost:3001](http://localhost:3001) in your browser to see the web application.
-The API is running at [http://localhost:3000](http://localhost:3000).
+## Scripts (root)
+- `pnpm run dev` — turbo dev (all apps)
+- `pnpm run dev:server` — backend only
+- `pnpm run dev:web` — frontend (placeholder) only
+- `pnpm run db:push` — run migrations via Drizzle (uses server config)
+- `pnpm run check-types` — type check monorepo
 
-
-
-
-
-
-
-## Project Structure
-
-```
-teuxdeux-clone/
-├── apps/
-│   ├── web/         # Frontend application (Next.js)
-│   └── server/      # Backend API (Express)
-├── packages/
-│   ├── api/         # API layer / business logic
-```
-
-## Available Scripts
-
-- `pnpm run dev`: Start all applications in development mode
-- `pnpm run build`: Build all applications
-- `pnpm run dev:web`: Start only the web application
-- `pnpm run dev:server`: Start only the server
-- `pnpm run check-types`: Check TypeScript types across all apps
-- `pnpm run db:push`: Push schema changes to database
-- `pnpm run db:studio`: Open database studio UI
+## Notes
+- Dates are stored as date-only (ISO `YYYY-MM-DD` for inputs).
+- Auth is not implemented; all routes scope to the seeded default user.
+- If you change the schema, regenerate migrations with Drizzle and rerun `db:push`.
