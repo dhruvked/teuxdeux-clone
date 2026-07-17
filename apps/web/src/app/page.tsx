@@ -1,7 +1,7 @@
 "use client";
 
-import HomePageClient from "@/component/HomePageClient";
+import HabitTracker from "@/component/HabitTracker";
 
 export default function Home() {
-  return <HomePageClient />;
+  return <HabitTracker />;
 }
